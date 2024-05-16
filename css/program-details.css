@@ -1,0 +1,38 @@
+.program-details {
+  padding: 7.4rem 0;
+}
+.product {
+  max-width: 130rem;
+  margin: 0 auto;
+  align-items: center;
+  gap: 1.2rem;
+}
+.product-img {
+  width: 70%;
+  margin-bottom: 2rem;
+}
+.product-description {
+  font-size: 2rem;
+  line-height: 1.5;
+  margin-bottom: 3.2rem;
+}
+.product-availability {
+  font-size: 1.4rem;
+  margin-bottom: 1.6rem;
+  font-weight: 700;
+}
+.product-length {
+  font-size: 1.4rem;
+  margin-bottom: 2rem;
+}
+.product-price {
+  font-size: 1.6rem;
+  margin-bottom: 2rem;
+  font-weight: bold;
+}
+.btn-details {
+  width: auto;
+}
+.detailed-cart {
+  margin-right: 1rem;
+}

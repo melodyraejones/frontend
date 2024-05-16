@@ -1,0 +1,229 @@
+.section-programs {
+  padding: 3.6rem;
+  background-color: aqua;
+}
+
+.shop-section {
+  max-width: 130rem;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 0.2fr 1fr;
+  gap: 3.6rem;
+}
+.header-cart {
+  font-size: 2rem;
+}
+.logout-btn {
+  background-color: rgb(173, 31, 31);
+  padding: 1rem 1rem;
+  color: #fff;
+  border-radius: 1rem;
+}
+.logout-btn:hover {
+  background-color: rgb(211, 44, 44);
+}
+
+.btn--purple {
+  background-color: #643482;
+  padding: 1rem 1rem;
+  color: #fff;
+  border-radius: 1rem;
+  transition: all 3s;
+}
+.btn--purple:hover {
+  background-color: #6a9c07;
+}
+.btn--dark-purple {
+  background-color: #4a2263;
+  color: #fff;
+  transition: all 3s;
+}
+.btn--dark-purple:hover {
+  background-color: #602d80;
+}
+
+.heading-primary {
+  font-size: 3.6rem;
+  line-height: 1.6;
+  font-weight: 700;
+  color: #333;
+  letter-spacing: -0.5px;
+  margin-bottom: 3.2rem;
+}
+
+.shop-list {
+  font-size: 2rem;
+  line-height: 1;
+  margin-bottom: 1rem;
+}
+
+.program-img {
+  object-fit: contain;
+  max-width: 100%;
+  height: auto;
+}
+
+.shop-items {
+  display: grid;
+  grid-template-columns: repeat(
+    3,
+    1fr
+  ); /* adjust the number of columns as per your layout needs */
+  gap: 2rem;
+}
+
+.program {
+  box-shadow: 0 2.4rem 4.8rem rgba(0, 0, 0, 0.075);
+  border-radius: 11px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  height: 100%; /* make program cards of equal height */
+}
+
+.program-content {
+  padding: 2rem 1.8rem;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.program-title {
+  font-size: 2rem;
+  color: #333;
+  font-weight: 600;
+  margin-bottom: 3.2rem;
+}
+.button-container .details {
+  margin-bottom: 1rem;
+}
+.program-attributes {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  flex-grow: 1;
+  overflow: auto;
+}
+
+.program-attribute {
+  font-size: 1.8rem;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 1.6rem;
+}
+.program-icon {
+  height: 2rem;
+  width: 2rem;
+  flex-shrink: 0;
+  flex-grow: 0;
+}
+
+.button-container {
+  text-align: center;
+  margin-top: auto;
+}
+
+.program-price {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2rem;
+  margin-top: 1rem;
+  font-weight: 700;
+}
+.header-cart {
+  display: flex;
+  justify-content: flex-end;
+  position: relative;
+}
+.cart-link {
+  position: relative;
+  text-decoration: none;
+  color: inherit;
+}
+
+.cart-badge {
+  display: flex;
+  background-color: red;
+  color: white;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  text-align: center;
+  line-height: 20px;
+  font-size: 12px;
+  position: absolute;
+  bottom: 1.2rem;
+  right: -0.8rem;
+  justify-content: center;
+  align-items: center;
+}
+
+.fa-shopping-cart {
+  font-size: 24px;
+  text-decoration: none;
+}
+.icons {
+  display: flex;
+  justify-content: space-between;
+}
+.dashicons {
+  margin: 1.5rem 1rem;
+  font-size: 2.5rem;
+  cursor: pointer;
+}
+.dashicons:hover {
+  font-size: 2.8rem;
+}
+.product-quantity {
+  margin: 1.2rem 1rem;
+  font-size: 2.5rem;
+}
+.icons a.add_to_cart,
+.icons a.remove_from_cart {
+  color: #000;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  text-decoration: none;
+  font-weight: bold;
+  display: inline-block;
+  text-align: center;
+  font-size: 3.2rem;
+}
+
+.icons a.add_to_cart:hover,
+.icons a.remove_from_cart:hover {
+  font-size: 3.4rem;
+}
+.empty-cart {
+  font-size: 2.8rem;
+  text-align: center;
+}
+.my-programs-icon {
+  text-decoration: none;
+  font-size: 1.6rem;
+}
+
+/* Media queries */
+/* BELOW 1344px --smaller desktops*/
+@media (max-width: 84em) {
+  .shop-section {
+    max-width: 120rem;
+  }
+  .heading-primary {
+    font-size: 3.2rem;
+  }
+}
+@media (max-width: 74em) {
+  .program-title {
+    font-size: 1.8rem;
+  }
+  .heading-primary {
+    font-size: 2.8rem;
+  }
+  .shop-list h3 {
+    font-size: 1.8rem;
+  }
+}
