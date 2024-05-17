@@ -1,6 +1,5 @@
 footer {
   font-family: "Courgette", cursive;
-
   font-weight: 400;
   font-style: normal;
 }
@@ -9,11 +8,13 @@ footer h2 {
 }
 
 .main-footer {
-  position: relative;
   background-color: #643482;
   color: #efefef;
-  margin-top: 15px;
+  margin-top: 5px;
   border-top: #562973 3px groove;
+  /* position: fixed; */
+  /* bottom: 0; */
+  width: 100%;
 }
 .phone {
   margin-top: 1rem;

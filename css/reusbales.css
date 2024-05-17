@@ -80,3 +80,17 @@ Medium: 11px
     gap: 3.6rem;
   }
 }
+/* BELOW 1024px */
+@media (max-width: 64em) {
+  .container {
+    max-width: 70rem;
+  }
+  .grid {
+    gap: 2.6rem;
+  }
+}
+@media (max-width: 49em) {
+  .container {
+    padding: 0 6.2rem;
+  }
+}
