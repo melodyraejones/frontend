@@ -41,6 +41,7 @@ body {
   text-align: center;
   margin-top: 2rem;
   height: 40rem;
+  border-radius: 1rem;
 }
 
 .icons {
@@ -401,5 +402,87 @@ h3.shop-list + a {
     grid-template-columns: 0.5fr 1fr;
     gap: 1.6rem;
     padding: 4rem 2rem;
+  }
+}
+@media (max-width: 36em) {
+  .main-content {
+    padding: 1.6rem;
+  }
+  .heading-primary {
+    font-size: 2rem;
+  }
+  h3.shop-list {
+    font-size: 1.4rem;
+  }
+  .first-link {
+    font-size: 1rem;
+  }
+
+  .second-link {
+    font-size: 1rem;
+  }
+
+  .third-link {
+    font-size: 1rem;
+  }
+  .btn.btn--small.btn--purple.login-btn {
+    font-size: 1rem;
+    margin-top: 5rem;
+    padding: 1rem 1rem;
+  }
+  .btn.btn--small.signup-btn {
+    font-size: 1rem;
+  }
+  .container {
+    padding: 0 4.2rem;
+  }
+  .shop-section {
+    gap: 1rem;
+  }
+}
+@media (max-width: 33em) {
+  .shop-items {
+    grid-template-columns: 1fr !important;
+    margin-top: 6rem;
+  }
+  .shop-section {
+    grid-template-columns: 1fr;
+    row-gap: 4rem;
+  }
+  .heading-primary {
+    font-size: 2.4rem;
+  }
+  h3.shop-list {
+    font-size: 1.4rem;
+  }
+  .btn.btn--small.btn--purple.login-btn,
+  .btn.btn--small.signup-btn {
+    font-size: 2rem;
+    padding: 1rem 2rem; /* Padding of 2rem from each side */
+    width: 60%;
+    box-sizing: border-box; /* Ensure padding is included in the width */
+  }
+  .heading-primary {
+    font-size: 3.4rem;
+  }
+  h3.shop-list {
+    font-size: 1.8rem;
+  }
+  p.program-title {
+    font-size: 2rem;
+    text-align: center;
+  }
+  .program-price {
+    font-size: 2rem;
+  }
+  .icons a.add_to_cart {
+    font-size: 2.8rem;
+  }
+  icons a.remove_from_cart {
+    font-size: 2.8rem;
+  }
+  .button-container .details {
+    padding: 2rem 1rem;
+    font-size: 1.8rem;
   }
 }

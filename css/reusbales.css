@@ -93,4 +93,7 @@ Medium: 11px
   .container {
     padding: 0 6.2rem;
   }
+  .grid {
+    gap: 1.2rem;
+  }
 }
