@@ -36,12 +36,14 @@ $webhookSecretKey = getenv('WEBHOOK_SECRET_KEY');
 \Stripe\Stripe::setApiKey($stripeSecretKey);
 
 // Function to get the cart URL based on the environment
-function get_cart_url() {
-    global $environment;
-    if ($environment === 'production') {
-        return 'https://yourlivewebsite.com/cart/';
-    } else {
-        return 'http://melodyraejones.local/shop/cart/';
+if (!function_exists('get_cart_url')) {
+    function get_cart_url() {
+        global $environment;
+        if ($environment === 'production') {
+            return 'https://yourlivewebsite.com/cart/';
+        } else {
+            return 'http://melodyraejones.local/shop/cart/';
+        }
     }
 }
 
