@@ -49,6 +49,8 @@ if (!function_exists('get_cart_url')) {
 
 // Function to create a Stripe Checkout Session
 function mrj_create_stripe_checkout_session(WP_REST_Request $request) {
+    global $environment; // Add this line to bring $environment into scope
+
     $user_id = get_current_user_id();
     $user_info = get_userdata($user_id);
     if (!$user_info) {
