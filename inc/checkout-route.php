@@ -29,10 +29,21 @@ if (file_exists($envPath)) {
     }
 }
 
-//  retrieve the environment variable
+// Retrieve environment variables
+$environment = getenv('ENVIRONMENT');
 $stripeSecretKey = getenv('STRIPE_SECRET_KEY');
-$webhookSecretKey = getenv('WEBOOK_SECRET_KEY');
+$webhookSecretKey = getenv('WEBHOOK_SECRET_KEY');
 \Stripe\Stripe::setApiKey($stripeSecretKey);
+
+// Function to get the cart URL based on the environment
+function get_cart_url() {
+    global $environment;
+    if ($environment === 'production') {
+        return 'https://yourlivewebsite.com/cart/';
+    } else {
+        return 'http://melodyraejones.local/shop/cart/';
+    }
+}
 
 // Function to create a Stripe Checkout Session
 function mrj_create_stripe_checkout_session(WP_REST_Request $request) {
@@ -64,7 +75,7 @@ function mrj_create_stripe_checkout_session(WP_REST_Request $request) {
             'line_items' => $line_items,
             'mode' => 'payment',
             'success_url' => home_url('/success?session_id={CHECKOUT_SESSION_ID}'),
-            'cancel_url' => 'https://171c-2607-fea8-b5e-8b00-1c0c-9521-85e0-e76f.ngrok-free.app/cancel',
+            'cancel_url' => $environment === 'production' ? 'https://yourlivewebsite.com/cancel' : 'https://171c-2607-fea8-b5e-8b00-1c0c-9521-85e0-e76f.ngrok-free.app/cancel',
             'metadata' => [
                 'user_id' => $user_id,
                 'username' => $user_info->user_login,
@@ -87,14 +98,12 @@ add_action('rest_api_init', function () {
     ));
 });
 
-
-
 function mrj_handle_stripe_webhook() {
     $payload = @file_get_contents('php://input');
     $sig_header = $_SERVER['HTTP_STRIPE_SIGNATURE'];
 
     // Your webhook secret from Stripe dashboard
-    $webhook_secret = $webhookSecretKey;
+    $webhook_secret = getenv('WEBHOOK_SECRET_KEY');
 
     try {
         $event = \Stripe\Webhook::constructEvent(
