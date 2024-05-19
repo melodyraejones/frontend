@@ -6,7 +6,7 @@ Template Name: Shop
 get_header(); 
 
 // Determine the cart URL based on the environment
-$cart_url = (getenv('ENVIRONMENT') === 'production') ? 'https://melodyraejones.com/shop/cart/' : 'http://melodyraejones.local/shop/cart/';
+$cart_url = (getenv('ENVIRONMENT') === 'production') ? 'https://melodyraejones.com/contact/shop/cart/' : 'http://melodyraejones.local/shop/cart/';
 
 ?>
 
