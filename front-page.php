@@ -1,17 +1,24 @@
-<?php 
+<?php
 /*
 Template Name: Shop
 */
 
 get_header(); 
+
+// Determine the cart URL based on the environment
+$cart_url = (getenv('ENVIRONMENT') === 'production') ? 'https://melodyraejones.com/shop/cart/' : 'http://melodyraejones.local/shop/cart/';
+
 ?>
+
+<script>
+    var cartUrl = "<?php echo esc_js($cart_url); ?>";
+</script>
 
 <div class="wrapper">
     <div class="main-content">
         <section class="section-programs">
             <div class="header-cart">
-            <a href="<?php echo get_cart_url(); ?>">
-                <!-- <a href="http://melodyraejones.local/shop/cart/"> -->
+                <a href="<?php echo esc_url($cart_url); ?>">
                     <i class="fas fa-shopping-cart"></i>
                     <span class="cart-badge">0</span>
                 </a>
