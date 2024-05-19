@@ -1,6 +1,16 @@
 <?php 
 require_once get_template_directory() . '/vendor/autoload.php';
 
+//cart url
+function get_cart_url() {
+    if (WP_ENV === 'production') {
+        return 'https://yourlivewebsite.com/cart/';
+    } else {
+        return 'http://melodyraejones.local/shop/cart/';
+    }
+}
+
+
 //direct checkout route:
 
 function mrj_direct_stripe_checkout(WP_REST_Request $request) {

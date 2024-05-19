@@ -10,7 +10,8 @@ get_header();
     <div class="main-content">
         <section class="section-programs">
             <div class="header-cart">
-                <a href="http://melodyraejones.local/shop/cart/">
+            <a href="<?php echo get_cart_url(); ?>">
+                <!-- <a href="http://melodyraejones.local/shop/cart/"> -->
                     <i class="fas fa-shopping-cart"></i>
                     <span class="cart-badge">0</span>
                 </a>
