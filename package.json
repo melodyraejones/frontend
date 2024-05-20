@@ -1,7 +1,6 @@
 {
   "name": "melody-rae-jones",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "scripts": {
     "build": "wp-scripts build",
@@ -18,5 +17,6 @@
   },
   "devDependencies": {
     "@wordpress/scripts": "^27.9.0"
-  }
+  },
+  "description": ""
 }

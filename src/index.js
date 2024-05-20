@@ -13,3 +13,10 @@ import { initializeDirectCheckout } from "./modules/direct-checkout";
 const myCart = new MyCart();
 
 initializeDirectCheckout();
+// Mobile navigation
+const btnNavEl = document.querySelector(".btn-mobile-nav");
+const headerEl = document.querySelector(".main-header");
+
+btnNavEl.addEventListener("click", function () {
+  headerEl.classList.toggle("nav-open");
+});

@@ -4721,6 +4721,12 @@ __webpack_require__.r(__webpack_exports__);
 
 const myCart = new _modules_cart__WEBPACK_IMPORTED_MODULE_0__["default"]();
 (0,_modules_direct_checkout__WEBPACK_IMPORTED_MODULE_2__.initializeDirectCheckout)();
+// Mobile navigation
+const btnNavEl = document.querySelector(".btn-mobile-nav");
+const headerEl = document.querySelector(".main-header");
+btnNavEl.addEventListener("click", function () {
+  headerEl.classList.toggle("nav-open");
+});
 })();
 
 /******/ })()
