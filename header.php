@@ -14,7 +14,7 @@
       </a>
     </h1>
   </div> -->
-  <header class="main-header">       
+  <header class="main-header nav-open">       
         
         <!-- Logo -->
         <div class="header-upper">
@@ -72,11 +72,13 @@
 								<li><a href="https://melodyraejones.com/members/login.html" target="_blank">Member Login</a></li>
                             </ul>							
                         </div>
-                        <button class="btn-mobile-nav"><span class="dashicons dashicons-menu icon-mobile-navigation" name="menu"></span><span class="dashicons dashicons-no-alt close-menu" name="close-menu"></span></button>
+                        
                     </nav>
+                   
                 </div>
             </div>
         </div>       
+        <button class="btn-mobile-nav"><span class="dashicons dashicons-menu icon-mobile-navigation" name="menu"></span><span class="dashicons dashicons-no-alt close-menu" name="close-menu"></span></button>
     </header>
 </body>
 </html>

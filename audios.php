@@ -32,7 +32,7 @@ if (is_user_logged_in()) {
                 $allAudios->the_post();
                 $related_programs = get_field('related_programs', get_the_ID());
 
-                if (!empty($related_programs) && is_array($related_programs)) {
+                if ($related_programs && is_array($related_programs)) {
                     foreach ($related_programs as $related_program) {
                         if (in_array($related_program->ID, $granted_access_program_ids)) {
                             $program_image_url = get_the_post_thumbnail_url($related_program->ID, 'program-img') ?: get_stylesheet_directory_uri() . '/images/path_to_default_image.jpg';
@@ -68,9 +68,6 @@ if (is_user_logged_in()) {
         echo '<a href="' . home_url() . '" class="btn btn--full btn-no-program">Explore Programs</a>';
         echo '</div>';
         echo '<hr>';
-           
-            
-
     }
 } else {
     echo '<p>You must be logged in to view this content.</p>';

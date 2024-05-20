@@ -3,15 +3,26 @@
   border: none;
   background: none;
   cursor: pointer;
+  position: absolute;
+  top: 10px;
+  right: 50px;
+  z-index: 1000;
   display: none;
 }
+
 .icon-mobile-nav {
   height: 4.8rem;
   width: 4.8rem;
 }
+
 .close-menu[name="close-menu"] {
   display: none;
 }
+
+.main-menu .navigation {
+  font-size: 3rem;
+}
+
 /*==================================================
 			Main Header style
 ===================================================*/
@@ -726,9 +737,12 @@
 @media (max-width: 59em) {
   .btn-mobile-nav {
     display: block;
+
+    padding: 0;
+    width: 5rem;
   }
-  .main-menu {
-    background-color: #2222226b;
+  .main-header .header-lower {
+    background-color: #26222ce5;
     position: absolute;
     top: 0;
     left: 0;
@@ -737,12 +751,52 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    visibility: hidden;
+    transition: all 0.5s;
+    transform: translateX(100%);
   }
-  .navigation {
+  .nav-open .header-lower {
+    opacity: 1;
+    pointer-events: auto;
+    visibility: visible;
+    transform: translateX(0);
+  }
+  .main-menu .navbar-header {
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
     gap: 2.8rem;
+    opacity: 0;
+    pointer-events: none;
+    visibility: hidden;
+    transition: all 0.3s ease-out;
+  }
+  .navbar-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 2.8rem;
+    opacity: 0;
+    pointer-events: none;
+    visibility: hidden;
+    transition: all 0.3s;
+  }
+
+  .main-menu .navigation {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 2.8rem;
+  }
+  .nav-open .dashicons-no-alt[name="close-menu"] {
+    display: block;
+  }
+  .nav-open .dashicons-menu[name="menu"] {
+    display: none;
   }
 }

@@ -16,7 +16,7 @@ class MyCart {
     this.cartItems = [];
     this.events();
     this.loadCartItems();
-    if (window.location.href.includes(cartUrl)) {
+    if (window.location.href.includes("/shop/cart/")) {
       this.loadCartItems();
       this.updateTotalOnBackend();
       this.payButton = document.querySelector(".pay-button");

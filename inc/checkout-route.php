@@ -2,55 +2,27 @@
 require_once __DIR__ . '/../vendor/autoload.php';
 $envPath = __DIR__ . '/../.env';
 
-// Check if the .env file exists
 if (file_exists($envPath)) {
-    // Open the .env file
     $envFile = fopen($envPath, 'r');
-
     if ($envFile) {
-        // Read each line of the .env file
         while (($line = fgets($envFile)) !== false) {
-            // Check if the line contains an 'equals' sign and isn't a comment
             if (strpos($line, '=') !== false && substr(trim($line), 0, 1) !== '#') {
-                // Remove whitespace and split the line into name and value
                 list($name, $value) = explode('=', $line, 2);
                 $name = trim($name);
                 $value = trim($value);
-
-                // Remove potential surrounding quotes
                 $value = trim($value, "'\"");
-
-                // Set the environment variable
                 putenv("$name=$value");
             }
         }
-        // Close the .env file
         fclose($envFile);
     }
 }
 
-// Retrieve environment variables
-$environment = getenv('ENVIRONMENT');
-$stripeSecretKey = getenv('STRIPE_SECRET_KEY');
-$webhookSecretKey = getenv('WEBHOOK_SECRET_KEY');
+$stripeSecretKey = "sk_test_51Nxe1kA8vWmHrQR2oh0vDM1uOzzzSollqNtxCVrPeUhthXUtE5tkh4NqbJ1182B8dJpYg7AC6Dy4ZssWSZtAOOIy00WFtiOhDc";
+$webhookSecretKey = "whsec_330e637ee22ca56085a232cbb9d913ee00097af1e7758bc91e558feabd773a22";
 \Stripe\Stripe::setApiKey($stripeSecretKey);
 
-// Function to get the cart URL based on the environment
-if (!function_exists('get_cart_url')) {
-    function get_cart_url() {
-        global $environment;
-        if ($environment === 'production') {
-            return 'https://yourlivewebsite.com/cart/';
-        } else {
-            return 'http://melodyraejones.local/shop/cart/';
-        }
-    }
-}
-
-// Function to create a Stripe Checkout Session
 function mrj_create_stripe_checkout_session(WP_REST_Request $request) {
-    global $environment; // Add this line to bring $environment into scope
-
     $user_id = get_current_user_id();
     $user_info = get_userdata($user_id);
     if (!$user_info) {
@@ -59,7 +31,7 @@ function mrj_create_stripe_checkout_session(WP_REST_Request $request) {
 
     $validated_data = $request->get_json_params();
     $product_names = array_map(function($item) {
-        return $item['name']; // Only capture the product name
+        return $item['name'];
     }, $validated_data['items']);
 
     $line_items = array_map(function($item) {
@@ -79,7 +51,7 @@ function mrj_create_stripe_checkout_session(WP_REST_Request $request) {
             'line_items' => $line_items,
             'mode' => 'payment',
             'success_url' => home_url('/success?session_id={CHECKOUT_SESSION_ID}'),
-            'cancel_url' => $environment === 'production' ? 'https://yourlivewebsite.com/cancel' : 'https://171c-2607-fea8-b5e-8b00-1c0c-9521-85e0-e76f.ngrok-free.app/cancel',
+            'cancel_url' => 'https://171c-2607-fea8-b5e-8b00-1c0c-9521-85e0-e76f.ngrok-free.app/cancel',
             'metadata' => [
                 'user_id' => $user_id,
                 'username' => $user_info->user_login,
@@ -93,7 +65,6 @@ function mrj_create_stripe_checkout_session(WP_REST_Request $request) {
     }
 }
 
-// Register the /checkout route
 add_action('rest_api_init', function () {
     register_rest_route('mrj/v1', '/checkout', array(
         'methods' => 'POST',
@@ -102,28 +73,36 @@ add_action('rest_api_init', function () {
     ));
 });
 
+add_action('rest_api_init', function () {
+    register_rest_route('mrj/v1', '/webhook', array(
+        'methods' => WP_REST_Server::CREATABLE,
+        'callback' => 'mrj_handle_stripe_webhook',
+        'permission_callback' => '__return_true'
+    ));
+});
+
 function mrj_handle_stripe_webhook() {
+    global $webhookSecretKey;
+
     $payload = @file_get_contents('php://input');
     $sig_header = $_SERVER['HTTP_STRIPE_SIGNATURE'];
 
-    // Your webhook secret from Stripe dashboard
-    $webhook_secret = getenv('WEBHOOK_SECRET_KEY');
+    error_log('Webhook received');
+    error_log('Payload: ' . $payload);
+    error_log('Signature: ' . $sig_header);
 
     try {
-        $event = \Stripe\Webhook::constructEvent(
-            $payload, $sig_header, $webhook_secret
-        );
+        $event = \Stripe\Webhook::constructEvent($payload, $sig_header, $webhookSecretKey);
     } catch(\UnexpectedValueException $e) {
-        // Invalid payload
+        error_log('Invalid payload: ' . $e->getMessage());
         http_response_code(400);
         exit();
     } catch(\Stripe\Exception\SignatureVerificationException $e) {
-        // Invalid signature
+        error_log('Invalid signature: ' . $e->getMessage());
         http_response_code(400);
         exit();
     }
 
-    // Handle the checkout.session.completed event
     if ($event->type == 'checkout.session.completed') {
         $session = $event->data->object;
         $user_id = $session->metadata->user_id;
@@ -132,30 +111,31 @@ function mrj_handle_stripe_webhook() {
         global $wpdb;
         $table_name = $wpdb->prefix . 'user_program_access';
 
-        // Update database based on $user_id and $product_names
+        error_log('Checkout session completed for user ID: ' . $user_id);
+        error_log('Product names: ' . json_encode($product_names));
+
         foreach ($product_names as $product_name) {
-            $wpdb->update(
+            $result = $wpdb->update(
                 $table_name,
-                ['access_granted' => 1], // Set access granted to true
+                ['access_granted' => 1],
                 [
                     'user_id' => $user_id,
                     'program_name' => $product_name 
                 ]
             );
+
+            error_log('SQL Query: ' . $wpdb->last_query);
+            if (false === $result) {
+                error_log('Failed to update database for user ID: ' . $user_id . ' and program name: ' . $product_name);
+            } else {
+                error_log('Database updated successfully for user ID: ' . $user_id . ' and program name: ' . $product_name);
+            }
         }
-        
-        http_response_code(200); // Acknowledge receipt of the event
+
+        http_response_code(200);
     } else {
+        error_log('Unhandled event type: ' . $event->type);
         http_response_code(400);
         exit();
     }
 }
-
-// Add a route to listen for the webhook events
-add_action('rest_api_init', function () {
-    register_rest_route('mrj/v1', '/webhook', array(
-        'methods' => WP_REST_Server::CREATABLE,
-        'callback' => 'mrj_handle_stripe_webhook',
-        'permission_callback' => '__return_true'
-    ));
-});
