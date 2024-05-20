@@ -14,7 +14,7 @@
       </a>
     </h1>
   </div> -->
-  <header class="main-header nav-open">       
+  <header class="main-header">       
         
         <!-- Logo -->
         <div class="header-upper">
