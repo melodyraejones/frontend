@@ -441,6 +441,10 @@ h3.shop-list + a {
   }
 }
 @media (max-width: 33em) {
+  .shop-text-box {
+    position: relative;
+    margin-bottom: 10rem;
+  }
   .shop-items {
     grid-template-columns: 1fr !important;
     margin-top: 6rem;
