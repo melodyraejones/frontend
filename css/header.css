@@ -754,7 +754,7 @@
     opacity: 0;
     pointer-events: none;
     visibility: hidden;
-    transition: all 0.5s;
+    transition: all 0.3s;
     transform: translateX(100%);
   }
   .nav-open .header-lower {
@@ -772,7 +772,7 @@
     opacity: 0;
     pointer-events: none;
     visibility: hidden;
-    transition: all 0.3s ease-out;
+    transition: all 0.5s ease-in;
   }
   .navbar-header {
     display: flex;
