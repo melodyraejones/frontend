@@ -363,6 +363,9 @@ h3.shop-list + a {
     font-size: 1.4rem;
     width: 8rem;
   }
+  .program-title {
+    font-size: 1.8rem;
+  }
 }
 
 @media (max-width: 74em) {
