@@ -139,6 +139,10 @@ body.login div#login form#loginform {
 .dashicons-visibility:before {
   color: #562973;
 }
+.login #backtoblog a,
+.login #nav a {
+  color: #fff;
+}
 
 @media (max-width: 75em) {
   html {
