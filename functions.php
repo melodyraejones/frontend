@@ -363,7 +363,7 @@ $currentUser = wp_get_current_user();
 add_filter('login_headerurl','headerUrl');
 
 function headerUrl(){
-    return 'https://melodyraejones.com';
+    return esc_url(site_url('/'));
 }
 add_action('login_enqueue_scripts','loginCSS');
 

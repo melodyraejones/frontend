@@ -79,6 +79,67 @@ a:visited {
   outline: none;
 }
 
+/* Login page */
+
+#login {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.login-action-login {
+  background-color: #28133abd;
+}
+.login h1 a {
+  background: url("../images/logo_white.png") no-repeat center center;
+  background-size: cover;
+  width: 35rem;
+  height: 10rem;
+  display: block;
+  max-width: 100%;
+}
+.login form {
+  display: grid;
+  grid-template-columns: 2fr;
+  column-gap: 3.2rem;
+  row-gap: 2.4rem;
+}
+.login form label {
+  display: block;
+  font-size: 1.6rem;
+  font-weight: 500;
+  margin-bottom: 1.2rem;
+}
+body.login div#login form#loginform {
+  background: rgba(
+    255,
+    255,
+    255,
+    0.8
+  ); /* Optional: Add a semi-transparent background for the form */
+  padding: 20px;
+  border-radius: 10px;
+}
+.login form .input {
+  border: none;
+}
+.login form label {
+  color: #562973;
+}
+.wp-core-ui .button.button-large {
+  background-color: #562973;
+  color: #fff;
+  border: none;
+  transition: all 0.3s;
+}
+.wp-core-ui .button.button-large:hover {
+  background-color: #6a9c07;
+}
+.dashicons-visibility:before {
+  color: #562973;
+}
+
 @media (max-width: 75em) {
   html {
     font-size: 56.25%;
