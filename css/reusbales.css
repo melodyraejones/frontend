@@ -77,24 +77,46 @@ Medium: 11px
 
 @media (max-width: 75em) {
   .grid {
-    gap: 3.6rem;
+    gap: 2rem;
+  }
+  .product-img {
+    width: 60%;
+  }
+  .product-image-box {
+    padding-left: 6rem;
+  }
+  .product-details-box {
+    padding-right: 6rem;
   }
 }
 /* BELOW 1024px */
 @media (max-width: 64em) {
-  /* .container {
-    max-width: 70rem;
-  } */
   .grid {
     gap: 2.6rem;
   }
+  .product-description {
+    font-size: 1.8rem;
+    line-height: 1.2;
+  }
+  .product-description p {
+    margin-bottom: 2rem;
+  }
 }
 
-@media (max-width: 49em) {
+@media (max-width: 50em) {
   .container {
     padding: 0 6.2rem;
   }
   .grid {
     gap: 1.2rem;
+  }
+  .product-img {
+    width: 100%;
+  }
+  .product-description {
+    font-size: 1.4rem;
+  }
+  .product-image-box {
+    padding-left: 3rem;
   }
 }
