@@ -10,7 +10,7 @@ $product_id = get_the_ID();
 
 <section class="program-details">
 <div class="header-cart detailed-cart">
-        <a href="http://melodyraejones.local/shop/cart/">
+    <a href="<?php echo esc_url( home_url( '/shop/cart/' ) ); ?>">
             <i class="fas fa-shopping-cart"></i>
             <span class="cart-badge">0</span>
         </a>
