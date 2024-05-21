@@ -14,6 +14,7 @@
 @import url("audio.css");
 @import url("all-audios.css");
 @import url("contact.css");
+@import url("sent.css");
 
 * {
   margin: 0px;
