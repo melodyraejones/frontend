@@ -1,27 +1,14 @@
 <?php
 require_once __DIR__ . '/../vendor/autoload.php';
-$envPath = __DIR__ . '/../.env';
 
-if (file_exists($envPath)) {
-    $envFile = fopen($envPath, 'r');
-    if ($envFile) {
-        while (($line = fgets($envFile)) !== false) {
-            if (strpos($line, '=') !== false && substr(trim($line), 0, 1) !== '#') {
-                list($name, $value) = explode('=', $line, 2);
-                $name = trim($name);
-                $value = trim($value);
-                $value = trim($value, "'\"");
-                putenv("$name=$value");
-            }
-        }
-        fclose($envFile);
-    }
-}
+// Access the Stripe secret keys from the wp-config.php
+$stripeSecretKey = defined('STRIPE_SECRET_KEY') ? STRIPE_SECRET_KEY : '';
+$webhookSecretKey = defined('STRIPE_WEBHOOK_SECRET') ? STRIPE_WEBHOOK_SECRET : '';
 
-$stripeSecretKey = "sk_test_51Nxe1kA8vWmHrQR2oh0vDM1uOzzzSollqNtxCVrPeUhthXUtE5tkh4NqbJ1182B8dJpYg7AC6Dy4ZssWSZtAOOIy00WFtiOhDc";
-$webhookSecretKey = "whsec_330e637ee22ca56085a232cbb9d913ee00097af1e7758bc91e558feabd773a22";
+// Set the Stripe API key
 \Stripe\Stripe::setApiKey($stripeSecretKey);
 
+// Function to create a Stripe Checkout Session
 function mrj_create_stripe_checkout_session(WP_REST_Request $request) {
     $user_id = get_current_user_id();
     $user_info = get_userdata($user_id);
@@ -51,7 +38,7 @@ function mrj_create_stripe_checkout_session(WP_REST_Request $request) {
             'line_items' => $line_items,
             'mode' => 'payment',
             'success_url' => home_url('/success?session_id={CHECKOUT_SESSION_ID}'),
-            'cancel_url' => 'https://171c-2607-fea8-b5e-8b00-1c0c-9521-85e0-e76f.ngrok-free.app/cancel',
+            'cancel_url' => home_url('/cancel'),
             'metadata' => [
                 'user_id' => $user_id,
                 'username' => $user_info->user_login,
@@ -65,6 +52,7 @@ function mrj_create_stripe_checkout_session(WP_REST_Request $request) {
     }
 }
 
+// Register the /checkout route
 add_action('rest_api_init', function () {
     register_rest_route('mrj/v1', '/checkout', array(
         'methods' => 'POST',
@@ -73,6 +61,7 @@ add_action('rest_api_init', function () {
     ));
 });
 
+// Register the /webhook route
 add_action('rest_api_init', function () {
     register_rest_route('mrj/v1', '/webhook', array(
         'methods' => WP_REST_Server::CREATABLE,
@@ -81,24 +70,19 @@ add_action('rest_api_init', function () {
     ));
 });
 
+// Function to handle Stripe webhooks
 function mrj_handle_stripe_webhook() {
     global $webhookSecretKey;
 
     $payload = @file_get_contents('php://input');
     $sig_header = $_SERVER['HTTP_STRIPE_SIGNATURE'];
 
-    error_log('Webhook received');
-    error_log('Payload: ' . $payload);
-    error_log('Signature: ' . $sig_header);
-
     try {
         $event = \Stripe\Webhook::constructEvent($payload, $sig_header, $webhookSecretKey);
     } catch(\UnexpectedValueException $e) {
-        error_log('Invalid payload: ' . $e->getMessage());
         http_response_code(400);
         exit();
     } catch(\Stripe\Exception\SignatureVerificationException $e) {
-        error_log('Invalid signature: ' . $e->getMessage());
         http_response_code(400);
         exit();
     }
@@ -111,11 +95,8 @@ function mrj_handle_stripe_webhook() {
         global $wpdb;
         $table_name = $wpdb->prefix . 'user_program_access';
 
-        error_log('Checkout session completed for user ID: ' . $user_id);
-        error_log('Product names: ' . json_encode($product_names));
-
         foreach ($product_names as $product_name) {
-            $result = $wpdb->update(
+            $wpdb->update(
                 $table_name,
                 ['access_granted' => 1],
                 [
@@ -123,18 +104,10 @@ function mrj_handle_stripe_webhook() {
                     'program_name' => $product_name 
                 ]
             );
-
-            error_log('SQL Query: ' . $wpdb->last_query);
-            if (false === $result) {
-                error_log('Failed to update database for user ID: ' . $user_id . ' and program name: ' . $product_name);
-            } else {
-                error_log('Database updated successfully for user ID: ' . $user_id . ' and program name: ' . $product_name);
-            }
         }
 
         http_response_code(200);
     } else {
-        error_log('Unhandled event type: ' . $event->type);
         http_response_code(400);
         exit();
     }
