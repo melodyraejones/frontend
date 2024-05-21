@@ -124,6 +124,9 @@ body.login div#login form#loginform {
 body.login-action-register {
   background-color: #28133abd;
 }
+body.login-action-lostpassword {
+  background-color: #28133abd;
+}
 .login form .input {
   border: none;
 }
@@ -137,13 +140,17 @@ body.login-action-register {
   row-gap: 2.4rem;
 }
 #registerform p input {
-  background-color: #28133abd;
+  background-color: #55297359;
   color: #fff;
 }
 #login form p {
   color: #562973;
 }
-
+.login form .input {
+  background-color: #55297359;
+  color: #fff;
+  border: none;
+}
 .wp-core-ui .button.button-large {
   background-color: #562973;
   color: #fff;
@@ -153,6 +160,7 @@ body.login-action-register {
 .wp-core-ui .button.button-large:hover {
   background-color: #6a9c07;
 }
+
 .dashicons-visibility:before {
   color: #562973;
 }
