@@ -121,12 +121,29 @@ body.login div#login form#loginform {
   padding: 20px;
   border-radius: 10px;
 }
+body.login-action-register {
+  background-color: #28133abd;
+}
 .login form .input {
   border: none;
 }
 .login form label {
   color: #562973;
 }
+.registerform {
+  display: grid;
+  grid-template-columns: 2fr;
+  column-gap: 3.2rem;
+  row-gap: 2.4rem;
+}
+#registerform p input {
+  background-color: #28133abd;
+  color: #fff;
+}
+#login form p {
+  color: #562973;
+}
+
 .wp-core-ui .button.button-large {
   background-color: #562973;
   color: #fff;
@@ -142,6 +159,10 @@ body.login div#login form#loginform {
 .login #backtoblog a,
 .login #nav a {
   color: #fff;
+}
+.login #backtoblog a:hover,
+.login #nav a:hover {
+  color: #6a9c07;
 }
 
 @media (max-width: 75em) {
