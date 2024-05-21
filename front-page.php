@@ -38,7 +38,7 @@ get_header();
         if ($page) { // Check if the page exists
             $page_url = get_permalink($page->ID);
             ?>
-            <a class="my-programs" href="<?php echo esc_url($page_url); ?>"><span class="dashicons dashicons-welcome-learn-more my-programs-icon">My Programs</span></a>
+            <div class="my-programs-access"><a class="my-programs" href="<?php echo esc_url($page_url); ?>"><span class="dashicons dashicons-welcome-learn-more my-programs-icon">My Programs</span></a></div>
             <?php
         } else {
             echo '<a href="#">Page not found</a>'; // Fallback link or message if page does not exist

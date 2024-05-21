@@ -253,9 +253,9 @@ h3.shop-list + a {
   cursor: pointer;
 }
 
-.dashicons:hover {
+/* .dashicons:hover {
   font-size: 2.8rem;
-}
+} */
 
 .product-quantity {
   margin: 1.2rem 1rem;
@@ -284,9 +284,38 @@ h3.shop-list + a {
   text-align: center;
 }
 
-.my-programs-icon {
-  text-decoration: none;
+/* New Styles for My Programs Link */
+/* New Styles for My Programs Link */
+.my-programs-access {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.my-programs {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem 2rem;
   font-size: 1.6rem;
+  color: #fff;
+  background-color: #28133a;
+  text-decoration: none;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  width: 50%;
+}
+
+.my-programs:hover {
+  background-color: #3c2154; /* Darker shade for hover effect */
+}
+
+.my-programs-icon {
+  margin-right: 8px; /* Space between icon and text */
+  font-size: 1.8rem;
+  vertical-align: middle;
 }
 
 .btn.btn--small.login-btn,
@@ -356,11 +385,11 @@ h3.shop-list + a {
 
 @media (max-width: 49em) {
   .program-title {
-    font-size: 1.4rem;
+    font-size: 2rem;
     margin-bottom: 1.8rem;
   }
   .program-price {
-    font-size: 1.4rem;
+    font-size: 1.8rem;
   }
   .icons a.add_to_cart {
     font-size: 2rem;
@@ -389,6 +418,9 @@ h3.shop-list + a {
   }
   .shop-list {
     font-size: 1.8rem;
+  }
+  .my-programs {
+    width: 70%;
   }
 }
 @media (max-width: 49em) {
@@ -439,6 +471,9 @@ h3.shop-list + a {
   .shop-section {
     gap: 1rem;
   }
+  .my-programs {
+    width: 80%;
+  }
 }
 @media (max-width: 33em) {
   .shop-text-box {
@@ -488,5 +523,8 @@ h3.shop-list + a {
   .button-container .details {
     padding: 2rem 1rem;
     font-size: 1.8rem;
+  }
+  .my-programs {
+    width: 50%;
   }
 }
