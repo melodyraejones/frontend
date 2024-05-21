@@ -98,13 +98,33 @@ body {
   font-size: 2rem;
   line-height: 1;
   margin-bottom: 1rem;
+  margin-top: 2rem;
 }
 
 h3.shop-list + a {
   display: inline-block;
   font-weight: bold;
-  font-size: 1.2rem;
+  font-size: 1.8rem;
   text-decoration: none;
+}
+.shop-link {
+  font-size: 1.6rem;
+  font-weight: bold;
+  color: #333;
+  text-decoration: none;
+}
+.shop-link-faves {
+  font-size: 1.6rem;
+  font-weight: bold;
+  color: #551a8b;
+  text-decoration: none;
+  margin-bottom: 2rem;
+}
+
+/* If needed, you can add hover effects */
+.shop-link:hover {
+  text-decoration: underline; /* Add underline on hover */
+  color: #643482; /* Change color on hover */
 }
 
 /* Target the specific links */

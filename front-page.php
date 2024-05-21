@@ -22,7 +22,7 @@ get_header();
                     <h3 class="shop-list">Soul Notes Meditations</h3>
                     <a href="https://melodyraejones.com/z_sample-pages/mels-faves.html">Daily Practices Series's </a>       
                 </div>
-                <a href="https://melodyraejones.com/z_sample-pages/mels-faves.html">Mel's Faves</a>       
+                <a href="https://melodyraejones.com/z_sample-pages/mels-faves.html" class="shop-link shop-link-faves">Mel's Faves</a>       
                 <div>
                     <h3 class="shop-list">Online Programs</h3>
                     <a href="https://melodyraejones.com/z_sample-pages/mels-faves.html">Expand Your Wisdom Toolkit</a>       
