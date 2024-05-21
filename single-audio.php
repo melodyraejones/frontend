@@ -59,7 +59,7 @@ if (is_user_logged_in()) {
                             <span class="dashicons dashicons-arrow-left-alt2"></span>
                         </div>
                         <div class="circle">
-                            <span class="dashicons dashicons-menu-alt2"></span>
+                        <span class="dashicons dashicons-download"></span>
                         </div>
                     </nav>
                             <!-- Display and controls for the audio files -->

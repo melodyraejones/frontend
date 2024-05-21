@@ -91,3 +91,37 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 });
+
+document.addEventListener("DOMContentLoaded", function () {
+  // Select the hamburger menu icon
+  const menuIcon = document.querySelector(".dashicons-download");
+  console.log(menuIcon);
+  // Function to download a file
+  function downloadFile(url, fileName) {
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = fileName;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+  }
+
+  // Attach click event to the menu icon
+  menuIcon.addEventListener("click", function () {
+    // Get audio elements
+    const introAudio = document.querySelector("#intro-audio source");
+    const mainAudio = document.querySelector("#main-audio source");
+    const disclaimerAudio = document.querySelector("#disclaimer-audio source");
+
+    // Download audio files if they exist
+    if (introAudio) {
+      downloadFile(introAudio.src, "intro_audio.mp3");
+    }
+    if (mainAudio) {
+      downloadFile(mainAudio.src, "main_audio.mp3");
+    }
+    if (disclaimerAudio) {
+      downloadFile(disclaimerAudio.src, "disclaimer_audio.mp3");
+    }
+  });
+});
