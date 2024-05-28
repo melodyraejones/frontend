@@ -128,7 +128,7 @@ function handle_custom_contact_form_submission() {
             $mail->Host = 'smtp.gmail.com';
             $mail->SMTPSecure = 'tls';
             $mail->Port = 587;
-            $mail->Username = 'melody@melodyraejones.com';
+            $mail->Username = 'akshaysharma543210@gmail.com';
             $mail->Password = 'feulvpnfltokqjkd';
             $mail->setFrom($email, $name);
             $mail->addAddress('melody@melodyraejones.com', 'Melody');
