@@ -128,10 +128,10 @@ function handle_custom_contact_form_submission() {
             $mail->Host = 'smtp.gmail.com';
             $mail->SMTPSecure = 'tls';
             $mail->Port = 587;
-            $mail->Username = 'akshaysharma581995@gmail.com';
+            $mail->Username = 'melody@melodyraejones.com';
             $mail->Password = 'feulvpnfltokqjkd';
             $mail->setFrom($email, $name);
-            $mail->addAddress('akshaysharma581995@gmail.com', 'Akshay');
+            $mail->addAddress('melody@melodyraejones.com', 'Melody');
             $mail->Subject = 'New Contact Form Submission';
             $mail->Body = "From: $name\nEmail: $email\nSource: $source\nMessage: $message";
             $mail->send();
