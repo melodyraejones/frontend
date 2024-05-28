@@ -131,7 +131,7 @@ function handle_custom_contact_form_submission() {
             $mail->Username = 'akshaysharma543210@gmail.com';
             $mail->Password = 'feulvpnfltokqjkd';
             $mail->setFrom($email, $name);
-            $mail->addAddress('melody@melodyraejones.com', 'Melody');
+            $mail->addAddress('akshaysharma543210@gmail.com', 'Melody');
             $mail->Subject = 'New Contact Form Submission';
             $mail->Body = "From: $name\nEmail: $email\nSource: $source\nMessage: $message";
             $mail->send();
