@@ -89,8 +89,11 @@ footer h2 {
   line-height: 20px; /*Location & Phone on Footer*/
   color: #fff;
   list-style-type: none;
+  font-style: normal;
 }
-
+.main-footer .contact-info li span {
+  font-style: normal;
+}
 .main-footer .contact-info li .icon {
   position: absolute;
   left: 0px;
@@ -551,4 +554,27 @@ footer h2 {
 }
 .footer-style-two .footer-social-links ul li:hover a {
   color: #222222;
+}
+.main-footer .footer-bottom {
+  position: relative;
+  padding: 14px 0px 12px;
+  background: #643482; /*#2b2e83;*/
+  text-align: center;
+  border-top: 1px solid #562973;
+}
+
+.main-footer .footer-bottom h4 {
+  line-height: 20px;
+  color: #ffffff; /*#5397b9;*/
+  font-size: 15px;
+  font-weight: 500;
+  font-family: "Arimo", sans-serif !important;
+}
+
+.main-footer .footer-bottom h4 a {
+  color: #fff; /*#5397b9;*/
+}
+
+.main-footer .footer-bottom h4 a:hover {
+  text-decoration: underline;
 }

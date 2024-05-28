@@ -65,6 +65,15 @@
       </div>
         </div>
       </div>
+      <div class="footer-bottom">
+            <div class="auto-container">
+                <div class="copyright-text">
+                  <h4>Copyright &copy; 2006 &ndash; <script language="JavaScript" type="text/javascript">document.write((new Date()).getFullYear());</script> Melody Rae Jones &ndash; All Rights Reserved<br />
+					<a href="disclaimer.html" target="_blank">Disclaimer</a></h4>
+                </div>
+            </div>
+        </div>
+    </footer>
     </footer>
 <?php wp_footer();?>
 

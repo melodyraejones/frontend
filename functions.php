@@ -10,6 +10,21 @@ function get_cart_url() {
     }
 }
 
+add_filter('wp_mail', 'my_debug_wp_mail');
+function my_debug_wp_mail($args) {
+    // Add headers if not already set
+    if (empty($args['headers'])) {
+        $args['headers'] = array(
+            'From: Your Name <your-email@example.com>',
+            'Content-Type: text/html; charset=UTF-8'
+        );
+    }
+    
+    error_log(print_r($args, true));
+    return $args;
+}
+
+
 
 //direct checkout route:
 
@@ -322,9 +337,11 @@ add_action('after_setup_theme', 'mrj_features');
 
 function mrj_enqueue_scripts() {
     // Enqueue Google Fonts
-    wp_enqueue_style('google-fonts', 'https://fonts.googleapis.com/css2?family=Courgette&display=swap', [], null);
-      // Enqueue the latest Font Awesome
-      wp_enqueue_style('font-awesome', 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css', [], null);
+    wp_enqueue_style('google-font-courgette', 'https://fonts.googleapis.com/css2?family=Courgette&display=swap', [], null);
+    wp_enqueue_style('google-font-arimo', 'https://fonts.googleapis.com/css2?family=Arimo:ital,wght@0,400..700;1,400..700&display=swap', [], null);
+    
+    // Enqueue the latest Font Awesome
+    wp_enqueue_style('font-awesome', 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css', [], null);
 
     // Enqueue other styles and scripts
     wp_enqueue_style('mrj_extra_styles', get_theme_file_uri('/css/main.css'));
@@ -338,6 +355,7 @@ function mrj_enqueue_scripts() {
 }
 
 add_action('wp_enqueue_scripts', 'mrj_enqueue_scripts');
+
 
 
 //redirect subscriber account out of admin to the homepage
