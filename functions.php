@@ -10,20 +10,64 @@ function get_cart_url() {
     }
 }
 
-add_filter('wp_mail', 'my_debug_wp_mail');
-function my_debug_wp_mail($args) {
-    // Add headers if not already set
+//for email
+add_filter('wp_mail', 'custom_wp_mail');
+function custom_wp_mail($args) {
+    // Set default headers if not present
     if (empty($args['headers'])) {
         $args['headers'] = array(
             'From: Your Name <your-email@example.com>',
             'Content-Type: text/html; charset=UTF-8'
         );
     }
-    
+
+    // Log email arguments for debugging
     error_log(print_r($args, true));
+
+    // Return modified arguments
     return $args;
 }
 
+if (!function_exists('wp_new_user_notification')) {
+    function wp_new_user_notification($user_id, $notify = 'both') {
+        global $wpdb, $wp_hasher;
+        
+        // Get user data
+        $user = get_userdata($user_id);
+        $user_login = stripslashes($user->user_login);
+        $user_email = stripslashes($user->user_email);
+
+        // Generate password reset key
+        $key = wp_generate_password(20, false);
+
+        do_action('retrieve_password_key', $user->user_login, $key);
+
+        // Send the password reset link email
+        $message = sprintf(__('Username: %s'), $user_login) . "\r\n\r\n";
+        $message .= __('To set your password, visit the following address:') . "\r\n\r\n";
+        $message .= network_site_url("wp-login.php?action=rp&key=$key&login=" . rawurlencode($user_login), 'login') . "\r\n\r\n";
+
+        // Email headers
+        $headers = array('Content-Type: text/plain; charset=UTF-8');
+        
+        // Send email
+        wp_mail($user_email, sprintf(__('[%s] Login Details'), get_option('blogname')), $message, $headers);
+
+        // Log email arguments for debugging
+        error_log(print_r(array(
+            'to' => $user_email,
+            'subject' => sprintf(__('[%s] Login Details'), get_option('blogname')),
+            'message' => $message,
+            'headers' => $headers,
+        ), true));
+    }
+}
+
+if (!function_exists('wp_password_change_notification')) {
+    function wp_password_change_notification($user) {
+        return; // Disable the default notification for password change
+    }
+}
 
 
 //direct checkout route:
